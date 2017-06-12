@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.app.chivosoft.dictamovil.bdAdaptor.bdAdaptor;
+
 import java.util.regex.Pattern;
 
 public class DictaMovilNewActivity extends AppCompatActivity {
@@ -19,6 +21,9 @@ public class DictaMovilNewActivity extends AppCompatActivity {
     private TextInputLayout tilPresion;
     private TextInputLayout tilPeso;
     private TextInputLayout tilAltura;
+
+    boolean almacenar = false;
+    bdAdaptor database = new bdAdaptor(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,7 @@ public class DictaMovilNewActivity extends AppCompatActivity {
         tilNombre = (TextInputLayout) findViewById(R.id.til_nombre);
         tilCedula = (TextInputLayout) findViewById(R.id.til_cedula);
         tilDomicilio = (TextInputLayout) findViewById(R.id.til_domicilio);
-        tilPresion = (TextInputLayout) findViewById(R.id.til_presión);
+        tilPresion = (TextInputLayout) findViewById(R.id.til_presionArterial);
         tilPeso = (TextInputLayout) findViewById(R.id.til_peso);
         tilAltura = (TextInputLayout) findViewById(R.id.til_altura);
 
@@ -48,6 +53,17 @@ public class DictaMovilNewActivity extends AppCompatActivity {
         });
     }
 
+    public void guardarDictamen(String nombre, String cedula, String domicilio,  String presion, String peso,String altura ){
+        //SQLiteDatabase db=database.getWritableDatabase();
+        Toast.makeText(getBaseContext(), "SE PROCEDE A ALMACENAR LOS DATOS ",
+                Toast.LENGTH_SHORT).show();
+        database.open();
+        long id=database.insertarDiactamen(nombre, cedula, domicilio, presion, peso, altura);
+        database.close();
+        Toast.makeText(getBaseContext(), "SE HAN ALMACENADO LOS DATOS", Toast.LENGTH_SHORT).show();
+        vaciarCampos();
+
+    }
     private boolean esNombreValido(String nombre) {
         Pattern patron = Pattern.compile("^[a-zA-Z ]+$");
         if (!patron.matcher(nombre).matches() || nombre.length() > 30) {
@@ -114,31 +130,39 @@ public class DictaMovilNewActivity extends AppCompatActivity {
         return true;
     }
 
+    private void vaciarCampos(){
+        tilNombre.getEditText().setText(" ");
+        tilCedula.getEditText().setText(" ");
+        tilDomicilio.getEditText().setText(" ");
+        tilPresion.getEditText().setText(" ");
+        tilPeso.getEditText().setText(" ");
+        tilAltura.getEditText().setText(" ");
+    }
     private void validarDatos() {
         String nombre = tilNombre.getEditText().getText().toString();
         String cedula = tilCedula.getEditText().getText().toString();
         String domicilio = tilDomicilio.getEditText().getText().toString();
-        String presion = tilPresion.getEditText().getText().toString();
+        String presionArterial = tilPresion.getEditText().getText().toString();
         String peso = tilPeso.getEditText().getText().toString();
         String altura = tilAltura.getEditText().getText().toString();
 
         boolean a = esNombreValido(nombre);
         boolean b = esCedulaValida(cedula);
         boolean c = esDomicilioValido(domicilio);
-        boolean d = esPresionValido(presion);
+        boolean d = esPresionValido(presionArterial);
         boolean e = esPesoValido(peso);
         boolean f = esAlturaValido(altura);
 
         if (a && b && c && d && e && f) {
 
-            Toast.makeText(this, "Se guarda el registro", Toast.LENGTH_LONG).show();
+            // Toast.makeText(this, "Se guarda el registro", Toast.LENGTH_LONG).show();
+            guardarDictamen(nombre, cedula, domicilio, presionArterial, peso, altura);
+
         }
 
     }
 
 
-    public void guardarDictamen(){
 
-    }
 
 }

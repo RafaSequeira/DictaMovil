@@ -26,7 +26,7 @@ public class bdAdaptor extends  SQLiteOpenHelper{
 
 
     private static final String TAG="bdAdaptor";
-    private static final String NOMBRE_BASEDATOS="DictaMovilBD";
+    private static final String NOMBRE_BASEDATOS="DictaMovilDB";
     private static final String TABLA_BASEDATOS="registroDictamen";
     private static final int VERSION_BASEDATOS=1;
     private static final String CREAR_BASEDATOS="create table registroDictamen (_id integer primary key autoincrement, nombre text, emai text);";
@@ -59,7 +59,7 @@ public class bdAdaptor extends  SQLiteOpenHelper{
     }
     public void close()
     {
-        this.close();
+        db.close();
     }
 
     public long insertarDiactamen(String nombre, String cedula, String domicilio, String presionArterial, String peso, String altura)

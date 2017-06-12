@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            android:id="@+id/til_presión"
+            android:id="@+id/til_presionArterial"
             android:textAlignment="center">
 
             <EditText
@@ -86,7 +86,7 @@
 
                 android:hint="Presión Arterial"
                 android:ems="10"
-                android:id="@+id/presión"
+                android:id="@+id/presionArterial"
                 android:textAlignment="center"  />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
