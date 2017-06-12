@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DictaMovil</string>
+    <string name="title_dictamovil_detail">DictaMovil Detail</string>
+    <string name="title_activity_dicta_movil_new">DictaMovilNewActivity</string>
+    <string name="hint_nombre" />
+    <string name="hint_cedula" />
+    <string name="hint_domicilio" />
+    <string name="hint_presion" />
+    <string name="hint_peso" />
+    <string name="hint_altura" />
+</resources>
